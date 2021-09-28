@@ -4,7 +4,7 @@ services:
     image: ghcr.io/suptar21/projectii-frontend:master
     container_name: studart-frontend
     ports:
-      - "9999:80"
+      - "80:80"
 
 networks:
   default:
