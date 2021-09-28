@@ -3,11 +3,10 @@ FROM node:lts-alpine as build-stage
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
-COPY ./ .
+COPY . .
 RUN npm run build
 
 # production stage
-FROM nginx:alpine as production-stage
-RUN mkdir /app
-COPY --from=build-stage /app/dist /app
+FROM nginx:stable-alpine as production-stage
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]
